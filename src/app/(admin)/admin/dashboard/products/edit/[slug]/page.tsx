@@ -4,8 +4,7 @@ import Link from "next/link";
 
 export const revalidate = 2
 
-export default async function ChangeProductPage(props: { params: Promise<{ slug: string }> }) {
-  const params = await props.params;
+export default async function ChangeProductPage({ params }: { params: { slug: string } }) {
   const slug = params.slug
 
   const product = await db.product.findFirst({
