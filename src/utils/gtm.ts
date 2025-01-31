@@ -47,8 +47,11 @@ const addToCart = (product: Product) => {
 };
 
 // begin checkout
-const beginCheckout = (event: any) => {
-  sendGTMEvent(event);
+const beginCheckout = (ecommerceEvent: any) => {
+  sendGTMEvent({
+    event: "begin_checkout",
+    ecommerce: ecommerceEvent,
+  });
 };
 
 // purchased item
