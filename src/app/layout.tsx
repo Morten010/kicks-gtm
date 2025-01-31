@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import Provider from '@/src/context/provider'
 import { Rubik } from 'next/font/google'
 import Script from 'next/script'
-import { GoogleTagManager } from '@next/third-parties/google'
+import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google'
 
 
 const rubik = Rubik({ subsets: ['latin'] })
@@ -30,6 +30,7 @@ export default function RootLayout({
         data-website-id="a0488504-232a-4524-861f-53d81acdf97e"
       />
       <GoogleTagManager gtmId="GTM-W657L4PM" />
+      <GoogleAnalytics gaId="G-GT4FN58C45" />
       <body className={`bg-grayish ${rubik.className}`}>
         <Provider>
           {children}
