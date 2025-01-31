@@ -1,13 +1,15 @@
 import { CreateProductForm } from "@/src/components";
 import { db } from "@/src/lib/db";
 import Link from "next/link";
-
+import React from "react"
 export const revalidate = 2
 
-type PageProps = { params: Promise<{ slug: string }> }
+interface Props {
+  params: Promise<{ slug: string }>;
+}
 
-export default async function ChangeProductPage({ params }: PageProps) {
-  const { slug } = await params;
+export default async function ChangeProductPage(props: Props) {
+  const { slug } = await props.params;
 
   const product = await db.product.findFirst({
     where: {

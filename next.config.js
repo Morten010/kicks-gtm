@@ -10,10 +10,9 @@ const nextConfig = {
             }
         ]
     },
+    serverExternalPackages: ['@prisma/client'],
     experimental: {
         webpackBuildWorker: true,
-        esmExternals: false,
-        serverComponentsExternalPackages: ['@prisma/client'],
     }
 }
 
