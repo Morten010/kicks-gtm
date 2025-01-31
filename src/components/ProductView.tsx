@@ -13,6 +13,7 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 
 import { sendGTMEvent } from '@next/third-parties/google'
+import { gtm } from '../utils/gtm'
 
 type CartItem = Product & {
     productImage?: ProductImage[]
@@ -50,6 +51,7 @@ export default function ProductView({ product }: ProductProps) {
 
 
         addProduct(cartProduct)
+        gtm.addToCart(product)
     }
     if (cart) {
         // console.log(cart.cart);
