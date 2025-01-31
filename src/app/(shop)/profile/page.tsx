@@ -1,12 +1,10 @@
 import { db } from '@/src/lib/db';
-import { Order} from '@prisma/client'
+import { Order } from '@prisma/client'
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/src/lib/db/authOptions';
 import SignoutButton from '@/src/components/profile/SignoutButton';
 
-export const dynamic = 'force-static'
-
-const initialUser : {
+const initialUser: {
   id?: any;
   firstName?: any;
   lastName?: string | undefined;
@@ -19,7 +17,7 @@ const initialUser : {
   lastName: "",
   gender: "",
   role: ''
-} 
+}
 
 
 
@@ -39,26 +37,26 @@ export default async function Profile() {
   // })
 
   // console.log(orders);
-  
-  
+
+
   return (
     <div
-    className='flex flex-col gap-2'
+      className='flex flex-col gap-2'
     >
       {/* profile details */}
       {user.email && <div>
         <h1
-        className='text-4xl font-semibold'
+          className='text-4xl font-semibold'
         >
           Profile
         </h1>
 
         {/* email */}
         <div
-        className='mt-4'
+          className='mt-4'
         >
           <h3
-          className='font-semibold text-lg'
+            className='font-semibold text-lg'
           >
             Email
           </h3>
@@ -69,13 +67,13 @@ export default async function Profile() {
 
         {/* first name and last name */}
         <div
-        className='mt-4 flex capitalize'
+          className='mt-4 flex capitalize'
         >
           <div
-          className='w-1/3'
+            className='w-1/3'
           >
             <h3
-            className='font-semibold text-lg'
+              className='font-semibold text-lg'
             >
               First Name
             </h3>
@@ -84,10 +82,10 @@ export default async function Profile() {
             </p>
           </div>
           <div
-          className='w-1/3'
+            className='w-1/3'
           >
             <h3
-            className='font-semibold text-lg'
+              className='font-semibold text-lg'
             >
               Last Name
             </h3>
@@ -96,10 +94,10 @@ export default async function Profile() {
             </p>
           </div>
           <div
-          className='w-1/3'
+            className='w-1/3'
           >
             <h3
-            className='font-semibold text-lg'
+              className='font-semibold text-lg'
             >
               gender
             </h3>
@@ -113,7 +111,7 @@ export default async function Profile() {
 
       <div>
         <h2
-        className='font-semibold text-2xl mb-2'
+          className='font-semibold text-2xl mb-2'
         >
           orders
         </h2>
