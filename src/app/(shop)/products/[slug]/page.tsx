@@ -3,9 +3,10 @@ import { db } from '@/src/lib/db'
 import { ProductDetailsProps } from '@/types'
 import React from 'react'
 
-export async function generateMetadata({ params }: ProductDetailsProps) {
+export async function generateMetadata(props: ProductDetailsProps) {
+  const params = await props.params;
   const slug = params.slug
-    
+
   try{
     const product = await db.product.findFirst({
       where: {
@@ -40,19 +41,20 @@ export async function generateMetadata({ params }: ProductDetailsProps) {
 }
 
 
-export default async function Product({params}: ProductDetailsProps) {
-    const slug = params.slug
-    
-    const product = await db.product.findFirst({
-      where: {
-        slug: slug
-      },
-      include: {
-        productImage: true,
-        size: true
-      }
-    })
-    
+export default async function Product(props: ProductDetailsProps) {
+  const params = await props.params;
+  const slug = params.slug
+
+  const product = await db.product.findFirst({
+    where: {
+      slug: slug
+    },
+    include: {
+      productImage: true,
+      size: true
+    }
+  })
+
 
   return (
     <div>

@@ -6,16 +6,17 @@ import React from 'react'
 export const revalidate = 0
 
 type SearchProps = {
-  searchParams: {
+  searchParams: Promise<{
       name?: string
       gender?: string
       sizes?: string[]
       orderby?: any
       category?: string
-  }
+  }>
 }
 
-export default async function Search({searchParams}: SearchProps) {
+export default async function Search(props: SearchProps) {
+  const searchParams = await props.searchParams;
   // format search sizes for get request
   let searchSizes: number[] | undefined = undefined
   if(typeof searchParams.sizes === "string"){
@@ -42,7 +43,7 @@ export default async function Search({searchParams}: SearchProps) {
       },
       gender: searchParams.gender,
     },
-  }) 
+  })
 
   const products = await db.product.findMany({
     orderBy: {
@@ -69,12 +70,12 @@ export default async function Search({searchParams}: SearchProps) {
       size: true,
     },
   })
-  
+
 
   const sizes = await db.size.groupBy({
     by: ['size'],
   })
-  
+
   const sortedSizes = sizes.map(item => {return item.size})
 
   return (

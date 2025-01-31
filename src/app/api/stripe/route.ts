@@ -17,7 +17,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? "", {
   }
 
 export async function POST(req: Request) {
-    const headersList = headers()
+    const headersList = await headers()
     const body: StripeBodyProps = await req.json()
     try {
         //get session user
