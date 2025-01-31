@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export const revalidate = 2
 
-export default async function ChangeProductPage({params}: {params: {slug: string}}) {
+export default async function ChangeProductPage({ params }: { params: { slug: string } }) {
   const slug = params.slug
 
   const product = await db.product.findFirst({
@@ -16,40 +16,40 @@ export default async function ChangeProductPage({params}: {params: {slug: string
       size: true,
     }
   })
-  
+
   return (
     <div
-    className="h-full"
+      className="h-full"
     >
       {/* product form */}
       <h1
-      className='text-xl font-semibold'
+        className='text-xl font-semibold'
       >
-          Edit Products
+        Edit Products
       </h1>
       {product && <CreateProductForm edit={true} product={product} />}
       {/* end of product form */}
-        
+
       {/* product dont exist */}
       {!product && <div
-      className="h-full grid place-content-center text-center"
+        className="h-full grid place-content-center text-center"
       >
         <h2
-        className="text-3xl font-semibold"
+          className="text-3xl font-semibold"
         >
           Product not found :(
         </h2>
         <p>
           Go Back To <Link
-          href="/admin/dashboard/products"
-          className="underline"
+            href="/admin/dashboard/products"
+            className="underline"
           >
             Products
           </Link>
         </p>
       </div>}
       {/* end of product dont exist */}
-      
+
     </div>
   )
 }
