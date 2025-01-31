@@ -51,7 +51,7 @@ export default function ProductView({ product }: ProductProps) {
 
 
         addProduct(cartProduct)
-        gtm.addToCart(product)
+        gtm.addToCart(product as Product)
     }
     if (cart) {
         // console.log(cart.cart);
@@ -101,7 +101,7 @@ export default function ProductView({ product }: ProductProps) {
     useEffect(() => {
         console.log('fire view event');
 
-        gtm.viewItemEvent(product)
+        gtm.viewItemEvent(product as Product)
     }, [])
 
     return (
