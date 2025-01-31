@@ -4,6 +4,8 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/src/lib/db/authOptions';
 import SignoutButton from '@/src/components/profile/SignoutButton';
 
+export const dynamic = 'force-static'
+
 const initialUser : {
   id?: any;
   firstName?: any;

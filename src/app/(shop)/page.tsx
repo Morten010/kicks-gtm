@@ -4,27 +4,28 @@ import Image from "next/image";
 import { Suspense } from "react";
 
 export const revalidate = 3600;
+export const dynamic = 'force-static'
 
 export default function Home() {
 
   return (
     <main
-    className="w-full flex flex-col gap-6"
+      className="w-full flex flex-col gap-6"
     >
       {/* hero title */}
       <Image
-      src="/hero-title.svg"
-      priority
-      width={300}
-      height={20}
-      className="w-full"
-      alt="do it right"
+        src="/hero-title.svg"
+        priority
+        width={300}
+        height={20}
+        className="w-full"
+        alt="do it right"
       />
       {/* hero title end */}
       <HeroProduct />
       {/* hero product */}
       <Suspense
-      fallback={<p>Is Loading...</p>}
+        fallback={<p>Is Loading...</p>}
       >
         <HomepageProducts />
       </Suspense>
@@ -32,7 +33,7 @@ export default function Home() {
 
       {/* start of categories */}
       <Suspense
-      fallback={<p>Is Loading...</p>}
+        fallback={<p>Is Loading...</p>}
       >
         <HomepageCategories />
       </Suspense>
@@ -44,7 +45,7 @@ export default function Home() {
 
 
 const HomepageProducts = async () => {
-  
+
   const products = await db.product.findMany({
     orderBy: {
       createdAt: "desc"
@@ -61,7 +62,7 @@ const HomepageProducts = async () => {
   })
 
   return (
-    <Products products={products}/>
+    <Products products={products} />
   )
 }
 

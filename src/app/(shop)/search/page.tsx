@@ -3,15 +3,16 @@ import SearchFormContainer from '@/src/components/forms/SearchFormContainer';
 import { db } from '@/src/lib/db'
 import React from 'react'
 
-export const revalidate = 0
+export const revalidate = 0;
+export const dynamic = 'force-static'
 
 type SearchProps = {
   searchParams: Promise<{
-      name?: string
-      gender?: string
-      sizes?: string[]
-      orderby?: any
-      category?: string
+    name?: string
+    gender?: string
+    sizes?: string[]
+    orderby?: any
+    category?: string
   }>
 }
 
@@ -19,10 +20,10 @@ export default async function Search(props: SearchProps) {
   const searchParams = await props.searchParams;
   // format search sizes for get request
   let searchSizes: number[] | undefined = undefined
-  if(typeof searchParams.sizes === "string"){
+  if (typeof searchParams.sizes === "string") {
     searchSizes = [parseInt(searchParams.sizes)]
-  } else if(typeof searchParams.sizes === "object"){
-    searchSizes = searchParams.sizes.map(s => {return parseInt(s)})
+  } else if (typeof searchParams.sizes === "object") {
+    searchSizes = searchParams.sizes.map(s => { return parseInt(s) })
   }
 
 
@@ -37,9 +38,9 @@ export default async function Search(props: SearchProps) {
             in: searchSizes
           }
         }
-      }, 
+      },
       categoryId: {
-        equals: searchParams.category ? parseInt(searchParams.category): undefined
+        equals: searchParams.category ? parseInt(searchParams.category) : undefined
       },
       gender: searchParams.gender,
     },
@@ -49,7 +50,7 @@ export default async function Search(props: SearchProps) {
     orderBy: {
       createdAt: searchParams.orderby ? searchParams.orderby : "desc"
     },
-    where: { 
+    where: {
       name: {
         contains: searchParams.name
       },
@@ -60,9 +61,9 @@ export default async function Search(props: SearchProps) {
             in: searchSizes
           }
         }
-      }, 
+      },
       categoryId: {
-        equals: searchParams.category ? parseInt(searchParams.category): undefined
+        equals: searchParams.category ? parseInt(searchParams.category) : undefined
       },
     },
     include: {
@@ -76,30 +77,30 @@ export default async function Search(props: SearchProps) {
     by: ['size'],
   })
 
-  const sortedSizes = sizes.map(item => {return item.size})
+  const sortedSizes = sizes.map(item => { return item.size })
 
   return (
     <div
-    className='flex flex-col lg:flex-row gap-4'
+      className='flex flex-col lg:flex-row gap-4'
     >
       <div
-      className='w-full lg:w-[30%] lg:inline-block'
+        className='w-full lg:w-[30%] lg:inline-block'
       >
         <SearchFormContainer count={count} sizes={sortedSizes} />
       </div>
       {/* product grid */}
       <div
-      className='w-full lg:w-[70%] h-full'
+        className='w-full lg:w-[70%] h-full'
       >
         <div
-        className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 h-full'
+          className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 h-full'
         >
           {products.length !== 0 && products.map(p => (
-            <ProductCard product={p} key={p.id}/>
+            <ProductCard product={p} key={p.id} />
           ))}
           {products.length === 0 && (
             <div
-            className='h-full grid place-content-center'
+              className='h-full grid place-content-center'
             >
               <p>No Products found.</p>
             </div>
