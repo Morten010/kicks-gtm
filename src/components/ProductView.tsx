@@ -1,7 +1,7 @@
 "use client"
 import { Product, ProductImage, Size } from '@prisma/client'
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 // styling
 import { AiOutlineHeart } from "react-icons/ai"
@@ -97,6 +97,12 @@ export default function ProductView({ product }: ProductProps) {
 
         router.push(data.url)
     }
+
+    useEffect(() => {
+        console.log('fire view event');
+
+        gtm.viewItemEvent(product)
+    }, [])
 
     return (
         <section
