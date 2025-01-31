@@ -47,7 +47,9 @@ const addToCart = (product: Product) => {
 };
 
 // begin checkout
-const beginCheckout = (event: any) => {};
+const beginCheckout = (event: any) => {
+  sendGTMEvent(event);
+};
 
 // purchased item
 const purchaseEvent = () => {

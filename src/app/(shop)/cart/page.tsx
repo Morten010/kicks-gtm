@@ -7,6 +7,7 @@ import { CartProduct } from '@/types'
 import { useEffect } from 'react'
 import { gtm, gtmHelpers } from '@/src/utils/gtm'
 import { Product } from '@prisma/client'
+import { formatPrice } from '../../utils/formatPrice'
 
 
 export default function page() {
@@ -14,9 +15,10 @@ export default function page() {
 
   useEffect(() => {
     let total = 0;
-    let items = [];
+    const items: any[] = [];
 
     cart?.cart.map((cartItem: Product) => {
+      total += parseInt(formatPrice(cartItem.price))
       items.push(gtmHelpers.formatProduct(cartItem))
     })
 
@@ -24,18 +26,7 @@ export default function page() {
       "productsSubtotal": total,
       "productsGrandTotal": total,
       "currency": "USD",
-      "items": [
-        {
-          "item_id": 308154,
-          "item_sku": "9000280-black-111",
-          "item_parent_sku": "9000280-black",
-          "item_name": "Bomb Sorona Vinterjakke",
-          "quantity": 2,
-          "price": 1500,
-          "currency": "DKK",
-          "index": 0
-        }
-      ],
+      items,
       "revenue": 0,
       "shipping": 0,
       "tax": 600,
